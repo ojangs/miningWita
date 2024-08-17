@@ -42,8 +42,8 @@ class Interface:
             mn.createListProduk(merged_data)
             transformedData = mn.transformData(merged_data)
             mn.rules(transformedData,merged_data)
-            mn.tampilProsesMining()
             session_state.proses_association_rule_done = True
+            mn.tampilProsesMining()
             if st.button("Memilih Kombinbasi Jenis", use_container_width=True, type="primary",):
                 session_state.selected_page = 'MemilihKombinasiJenis'
                 st.rerun()
