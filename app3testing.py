@@ -72,6 +72,8 @@ class Interface:
                             st.rerun()
                     else:
                         st.error('Tidak Ada Rekomendasi Kombinasi Jenis, Silahkan Ganti File Transaksi dengan Periode Waktu yang berbeda')
+            else:
+                st.error('Proses Mining Belum dilakukan, silahkan pindah ke halaman melihat proses mining terlebih dahulu')
         else:
             if mn.getUploadKatalog().empty and mn.getUploadTransaksi().empty:
                 st.error('Masukkan kedua file terlebih dahulu')
