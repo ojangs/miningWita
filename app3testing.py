@@ -22,7 +22,7 @@ class Interface:
             if 'upload_transactions' in session_state and 'upload_katalog' in session_state:
                 if not mn.getUploadTransaksi().empty and not mn.getUploadKatalog().empty:
                     session_state.selected_page = "Proses Mining"
-                    st.experimental_rerun()
+                    st.rerun()
                 elif mn.getUploadKatalog().empty and mn.getUploadTransaksi().empty:
                     st.error('Masukkan kedua file terlebih dahulu')
                 elif mn.getUploadKatalog().empty:
@@ -46,7 +46,7 @@ class Interface:
             session_state.proses_association_rule_done = True
             if st.button("Memilih Kombinbasi Jenis", use_container_width=True, type="primary",):
                 session_state.selected_page = 'MemilihKombinasiJenis'
-                st.experimental_rerun()
+                st.rerun()
         else:
             if mn.getUploadKatalog().empty and mn.getUploadTransaksi().empty:
                 st.error('Masukkan kedua file terlebih dahulu')
@@ -69,7 +69,7 @@ class Interface:
                             list_produk = session_state.list_produk
                             pb.cari_Kombinasi(selected_rules,list_produk)
                             session_state.selected_page = 'HasilPaket'
-                            st.experimental_rerun()
+                            st.rerun()
                     else:
                         st.error('Tidak Ada Rekomendasi Kombinasi Jenis, Silahkan Ganti File Transaksi dengan Periode Waktu yang berbeda')
         else:
@@ -94,7 +94,7 @@ class Interface:
                         if st.button('Ganti Kombinasi Jenis'):
                             mn.setJenis(pd.DataFrame(),pd.DataFrame())
                             session_state.selected_page = 'MemilihKombinasiJenis'
-                            st.experimental_rerun()
+                            st.rerun()
                     else:
                         st.error('Silahkan Memilih Kombinasi Jenis Terlebih Dahulu ')
                 else:
@@ -113,7 +113,7 @@ class Interface:
            
         #     if st.button('Lihat Hasil Paket Bundling',type='primary'):
         #         session_state.selected_page = 'HasilPaket'
-        #         st.experimental_rerun()
+        #         st.rerun()
 
         
 
