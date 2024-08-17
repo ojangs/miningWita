@@ -37,7 +37,7 @@ class Mining:
             st.success("File Berhasil dimasukkan")
             if st.button("Ganti data transaksi"):
                 Mining.setUploadTransaksi(None, None)
-                st.experimental_rerun()
+                st.rerun()
 
     def validasiMasukkanTransaksi(file):
         if file:
@@ -47,7 +47,7 @@ class Mining:
             missing_columns = [col for col in required_columns if col not in dataframe_transaction.columns]
             if len(missing_columns) == 0:
                 Mining.setUploadTransaksi(file, dataframe_transaction)
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("File tidak valid")
 
@@ -84,7 +84,7 @@ class Mining:
             st.success("File Berhasil dimasukkan")
             if st.button("Ganti file katalog", key='katalog'):
                 Mining.setUploadKatalog(None, None)
-                st.experimental_rerun()
+                st.rerun()
 
     def validasiMasukkanKatalog(file):
         if file:
@@ -94,7 +94,7 @@ class Mining:
             missing_columns = [col for col in required_columns if col not in dataframe_katalog.columns]
             if len(missing_columns) == 0:
                 Mining.setUploadKatalog(file, dataframe_katalog)
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("File tidak valid")
 
@@ -409,7 +409,7 @@ class PaketBundling:
                 st.warning('Tidak Ada Rekomendasi Paket yang Ditemukan, Silahkan Pilih Kombinasi Jenis Yang Lain atau membuat paket secara manual')
                 if st.button('Buat Paket Bundling'):
                     session_state.selected_page = 'BuatPaketBundling'
-                    st.experimental_rerun()
+                    st.rerun()
                 
                 
         else:
