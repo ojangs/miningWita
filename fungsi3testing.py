@@ -148,7 +148,7 @@ class Mining:
     
     
     def rules(te_encode,mergeData):
-        min_confidence = 0.6
+        min_confidence = 0.7
         findminSup = mergeData.copy()
         minSup = findminSup.groupby('Faktur')['Jenis'].apply(lambda x: list(set(x))).tolist()
         meanKemunculanJenis = sum(len(transaction)for transaction in minSup)/len(minSup)
