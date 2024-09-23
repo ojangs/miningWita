@@ -18,10 +18,20 @@ class Interface:
         upload2 = mn.memasukkanKatalog()
         mn.validasiMasukkanKatalog(upload2)
 
-        if st.button('Melihat Proses Mining', type="primary", use_container_width=True):
+        if st.button('Pilih Kombinasi Jenis', type="primary", use_container_width=True):
             if 'upload_transactions' in session_state and 'upload_katalog' in session_state:
                 if not mn.getUploadTransaksi().empty and not mn.getUploadKatalog().empty:
-                    session_state.selected_page = "Proses Mining"
+                    if 'proses_association_rule_done' not in session_state:
+                        session_state.proses_association_rule_done = False
+                    df_transaksi = mn.getUploadTransaksi()
+                    df_katalog = mn.getUploadKatalog()
+                    cleaned_data = mn.cleaning(df_transaksi,df_katalog)
+                    merged_data = mn.merging(cleaned_data,df_katalog)
+                    mn.createListProduk(merged_data)
+                    transformedData = mn.transformData(merged_data)
+                    mn.rules(transformedData,merged_data)
+                    session_state.proses_association_rule_done = True
+                    session_state.selected_page = "MemilihKombinasiJenis"
                     st.rerun()
                 elif mn.getUploadKatalog().empty and mn.getUploadTransaksi().empty:
                     st.error('Masukkan kedua file terlebih dahulu')
@@ -30,30 +40,7 @@ class Interface:
                 elif mn.getUploadTransaksi().empty:
                     st.error("Masukkan file transaksi terlebih dahulu")
 
-    def halamanProsesMining():
-        st.markdown('<h1>Halaman Proses Mining</h1>', unsafe_allow_html=True)
-        if not mn.getUploadTransaksi().empty and not mn.getUploadKatalog().empty:
-            if 'proses_association_rule_done' not in session_state:
-                session_state.proses_association_rule_done = False
-            df_transaksi = mn.getUploadTransaksi()
-            df_katalog = mn.getUploadKatalog()
-            cleaned_data = mn.cleaning(df_transaksi,df_katalog)
-            merged_data = mn.merging(cleaned_data,df_katalog)
-            mn.createListProduk(merged_data)
-            transformedData = mn.transformData(merged_data)
-            mn.rules(transformedData,merged_data)
-            session_state.proses_association_rule_done = True
-            mn.tampilProsesMining()
-            if st.button("Memilih Kombinbasi Jenis", use_container_width=True, type="primary",):
-                session_state.selected_page = 'MemilihKombinasiJenis'
-                st.rerun()
-        else:
-            if mn.getUploadKatalog().empty and mn.getUploadTransaksi().empty:
-                st.error('Masukkan kedua file terlebih dahulu')
-            if mn.getUploadKatalog().empty and not mn.getUploadTransaksi().empty:
-                st.error("Masukkan file katalog terlebih dahulu")
-            if mn.getUploadTransaksi().empty and not mn.getUploadKatalog().empty:
-                st.error("Masukkan file transaksi terlebih dahulu")
+    
 
     def halamanMemilihKombinasiJenis():
         st.markdown('<h2>REKOMENDASI KOMBINASI JENIS</h2>', unsafe_allow_html=True)
@@ -128,7 +115,7 @@ class Main():
         ui = Interface
         pages = {
             "Masukkan File": ui.halamanMasukkanFile,
-            "Proses Mining": ui.halamanProsesMining,
+            
             "MemilihKombinasiJenis": ui.halamanMemilihKombinasiJenis,
             "HasilPaket": ui.halamanHasilPaketBundling,
             "BuatPaketBundling": ui.halamanBuatBundling
@@ -139,9 +126,7 @@ class Main():
         if selected_page:
             session_state.selected_page = "Masukkan File"
 
-        selected_page = st.sidebar.button("Melihat Proses Mining", use_container_width=True)
-        if selected_page:
-            session_state.selected_page = "Proses Mining"
+        
 
         selected_page = st.sidebar.button("Memilih Kombinasi Jenis", use_container_width=True)
         if selected_page:
