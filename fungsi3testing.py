@@ -193,6 +193,7 @@ class Mining:
         session_state.df_association = df_association
         
         df_association_unique = df_association.copy()
+        df_association_unique.drop(columns=["representativity","jaccard","certainty","kulczynski"], inplace=True)
         df_association_unique['Jenis Produk'] = df_association_unique['Jenis Produk'].astype(str)
         df_association_unique = df_association_unique.drop_duplicates(subset='Jenis Produk')
         df_association_unique['Jenis Produk'] = df_association_unique['Jenis Produk'].apply(eval)
