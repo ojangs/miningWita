@@ -1,6 +1,6 @@
 website link : https://bundling-wita.streamlit.app/
 
-HAL YANG DIPERHATIKAN
+HAL YANG HARUS DIPERHATIKAN
 1. Nilai Support yang digunakan bersifat dinamis dengan menghitung **rata - rata jenis produk terjual per transaksi**
 2. Nilai Confidence yang digunakan adalah adalah **100%**
 3. Nilai Minumum Lift Ratio yang digunakan adalah **1**
