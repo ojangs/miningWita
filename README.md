@@ -1,4 +1,8 @@
 website link : https://bundling-wita.streamlit.app/
 
-**dalam sebuah RULE hanya terdapat 2 - 4 jenis produk**
-ini disesuaikan dengan studi kasus
+HAL YANG DIPERHATIKAN
+1. Nilai Support yang digunakan bersifat dinamis dengan menghitung **rata - rata jenis produk terjual per transaksi**
+2. Nilai Confidence yang digunakan adalah adalah **100%**
+3. Nilai Minumum Lift Ratio yang digunakan adalah **1**
+4. Hasil MODELLING akan difilter dan disesuaikan dengan kebutuhan studi kasus. Sehingga hanya akan ada **2 - 4 jenis produk dalam sebuah rule**
+
